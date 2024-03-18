@@ -1,60 +1,74 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, ProgressPlugin } from 'webpack';
 import 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { VueLoaderPlugin } from 'vue-loader'
+import { VueLoaderPlugin } from 'vue-loader';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-type Mode = 'development' | 'production'
+type Mode = 'development' | 'production';
 
 interface EnvVariables {
-  mode: Mode
+  mode?: Mode;
+  port?: number;
 }
 
 export default (env: EnvVariables) => {
+  const isDev = env.mode === 'development';
 
   const config: Configuration = {
-    mode: env.mode || 'production',
+    mode: env.mode || 'development',
     entry: path.resolve(__dirname, 'src', 'index.ts'),
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].[contenthash].js',
       clean: true,
     },
-    devServer: {
-      static: path.resolve(__dirname, 'build'),
-    },
     module: {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: 'vue-loader',
         },
         {
           test: /\.scss$/,
           use: [
-            'vue-style-loader',
+            isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
-            'sass-loader'
-          ]
+            'sass-loader',
+          ],
         },
         {
           test: /\.ts$/,
           loader: 'ts-loader',
-          options: { appendTsSuffixTo: [/\.vue$/] }
+          options: { appendTsSuffixTo: [/\.vue$/] },
         },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
-      new VueLoaderPlugin()
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
+      new VueLoaderPlugin(),
+      !isDev
+        ? new MiniCssExtractPlugin({
+            filename: 'css/[name].[contenthash].css',
+            chunkFilename: 'css/[name].[contenthash].css',
+          })
+        : null,
+      isDev ? new ProgressPlugin() : null,
+    ].filter(Boolean),
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+      extensions: ['.ts', '.js', '.vue', '.json'],
     },
-    extensions: ['.ts', '.js', '.vue', '.json'],
-  },
+    devServer: isDev
+      ? {
+          port: env.port || 3000,
+          open: true,
+        }
+      : undefined,
+    devtool: isDev ? 'inline-source-map' : undefined,
   };
 
-  return config
+  return config;
 };

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-
-const count = ref<number>(1)
+const count = ref(100)
 
 const logginCount = computed(() => `the count now is ${count.value}`)
 
@@ -16,14 +15,24 @@ function decrement() {
 
 
 <template>
-  <div class="vue-app">{{ count }}</div>
-  <button @click="increment">Increment</button>
-  <button @click="decrement">Decrement</button>
-  <span>{{ logginCount }}</span>
+  <div class="vue-app">
+    <div>{{ count }}</div>
+    <button @click="increment">Increment</button>
+    <button @click="decrement">Decrement</button>
+    <span>{{ logginCount }}</span>
+  </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .vue-app {
-  background-color: red;
+  button {
+    &:nth-child(2) {
+      background-color: green;
+    }
+
+    &:nth-child(3) {
+      background-color: red;
+    }
+  }
 }
 </style>
