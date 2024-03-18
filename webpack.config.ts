@@ -2,6 +2,7 @@ import path from 'path';
 import { Configuration } from 'webpack';
 import 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { VueLoaderPlugin } from 'vue-loader'
 
 type Mode = 'development' | 'production'
 
@@ -19,22 +20,40 @@ export default (env: EnvVariables) => {
       filename: '[name].[contenthash].js',
       clean: true,
     },
-    plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') })],
     devServer: {
       static: path.resolve(__dirname, 'build'),
     },
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            'sass-loader'
+          ]
+        },
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          options: { appendTsSuffixTo: [/\.vue$/] }
         },
       ],
     },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
+    plugins: [
+      new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
+      new VueLoaderPlugin()
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
     },
+    extensions: ['.ts', '.js', '.vue', '.json'],
+  },
   };
 
   return config

@@ -1,3 +1,6 @@
-import { calc } from './func';
+import { createApp } from 'vue'
+import App from './App.vue'
 
-console.log(calc(6, 6892));
+const app = createApp(App)
+
+app.mount('#root')
