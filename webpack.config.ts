@@ -1,9 +1,12 @@
 import path from 'path';
-import { Configuration, ProgressPlugin } from 'webpack';
+import { Configuration } from 'webpack';
 import 'webpack-dev-server';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { VueLoaderPlugin } from 'vue-loader';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { buildLoaders } from './webpack-helpers/buildLoaders';
+import { buildPlugins } from './webpack-helpers/buildPlugins';
+import { buildResolvers } from './webpack-helpers/buildResolvers';
+import { buildDevServer } from './webpack-helpers/buildDevServer';
+import { buildEntry } from './webpack-helpers/buildEntry';
+import { buildOutput } from './webpack-helpers/buildOutput';
 
 type Mode = 'development' | 'production';
 
@@ -15,58 +18,21 @@ interface EnvVariables {
 export default (env: EnvVariables) => {
   const isDev = env.mode === 'development';
 
+  const entryPath = path.resolve(__dirname, 'src', 'index.ts')
+  const outputPath = path.resolve(__dirname, 'build')
+  const htmlPath = path.resolve(__dirname, 'public', 'index.html')
+  const aliasPath = path.resolve(__dirname, 'src')
+
   const config: Configuration = {
     mode: env.mode || 'development',
-    entry: path.resolve(__dirname, 'src', 'index.ts'),
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: '[name].[contenthash].js',
-      clean: true,
-    },
+    entry: buildEntry(entryPath),
+    output: buildOutput(outputPath),
     module: {
-      rules: [
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            'sass-loader',
-          ],
-        },
-        {
-          test: /\.ts$/,
-          loader: 'ts-loader',
-          options: { appendTsSuffixTo: [/\.vue$/] },
-        },
-      ],
+      rules: buildLoaders(isDev),
     },
-    plugins: [
-      new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
-      new VueLoaderPlugin(),
-      !isDev
-        ? new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash].css',
-            chunkFilename: 'css/[name].[contenthash].css',
-          })
-        : null,
-      isDev ? new ProgressPlugin() : null,
-    ].filter(Boolean),
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'src'),
-      },
-      extensions: ['.ts', '.js', '.vue', '.json'],
-    },
-    devServer: isDev
-      ? {
-          port: env.port || 3000,
-          open: true,
-        }
-      : undefined,
+    plugins: buildPlugins(htmlPath, isDev),
+    resolve: buildResolvers(aliasPath),
+    devServer: buildDevServer(isDev, env.port),
     devtool: isDev ? 'inline-source-map' : undefined,
   };
 
