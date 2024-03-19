@@ -3,6 +3,7 @@ export function buildDevServer(isDev: boolean, port: number) {
   ? {
       port: port || 3000,
       open: true,
+      historyApiFallback: true
     }
   : undefined
 }

@@ -34,6 +34,11 @@ export default (env: EnvVariables) => {
     resolve: buildResolvers(aliasPath),
     devServer: buildDevServer(isDev, env.port),
     devtool: isDev ? 'inline-source-map' : undefined,
+    // optimization: {
+    //   splitChunks: {
+    //     chunks: 'all',
+    //   },
+    // },
   };
 
   return config;
