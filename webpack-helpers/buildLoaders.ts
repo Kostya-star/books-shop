@@ -19,5 +19,9 @@ export function buildLoaders(isDev: boolean) {
       loader: 'ts-loader',
       options: { appendTsSuffixTo: [/\.vue$/] },
     },
+    {
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      type: 'asset/resource',
+    },
   ]
 }

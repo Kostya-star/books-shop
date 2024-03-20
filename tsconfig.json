@@ -9,5 +9,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*" : ["./src/*"]
+    }
   }
 }
