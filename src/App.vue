@@ -12,6 +12,9 @@
       <router-link to="/about">Go To About</router-link>
     </nav>
 
+    <p>
+      dsasddsddddddd
+    </p>
     <main>
       <router-view/>
     </main>

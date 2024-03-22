@@ -1,6 +1,7 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { ModuleOptions } from 'webpack';
 
-export function buildLoaders(isDev: boolean) {
+export function buildLoaders(isDev: boolean): ModuleOptions['rules'] {
   return [
     {
       test: /\.vue$/,
@@ -17,7 +18,11 @@ export function buildLoaders(isDev: boolean) {
     {
       test: /\.ts$/,
       loader: 'ts-loader',
-      options: { appendTsSuffixTo: [/\.vue$/] },
+      exclude: /node_modules/,
+      options: { 
+        appendTsSuffixTo: [/\.vue$/],
+        transpileOnly: isDev
+     },
     },
     {
       test: /\.(png|svg|jpg|jpeg|gif)$/i,

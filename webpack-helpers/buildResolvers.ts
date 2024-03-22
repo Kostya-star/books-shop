@@ -1,4 +1,6 @@
-export function buildResolvers(path: string) {
+import { Configuration } from 'webpack';
+
+export function buildResolvers(path: string): Configuration['resolve'] {
   return {
     alias: {
       '@': path,

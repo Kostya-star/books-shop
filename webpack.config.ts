@@ -1,5 +1,5 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, ModuleOptions } from 'webpack';
 import 'webpack-dev-server';
 import { buildLoaders } from './webpack-helpers/buildLoaders';
 import { buildPlugins } from './webpack-helpers/buildPlugins';
@@ -22,6 +22,7 @@ export default (env: EnvVariables) => {
   const outputPath = path.resolve(__dirname, 'build')
   const htmlPath = path.resolve(__dirname, 'public', 'index.html')
   const aliasPath = path.resolve(__dirname, 'src')
+  const faviconPath = path.resolve(__dirname, 'public', 'favicon.png')
 
   const config: Configuration = {
     mode: env.mode || 'development',
@@ -30,15 +31,10 @@ export default (env: EnvVariables) => {
     module: {
       rules: buildLoaders(isDev),
     },
-    plugins: buildPlugins(htmlPath, isDev),
+    plugins: buildPlugins(htmlPath, faviconPath, isDev),
     resolve: buildResolvers(aliasPath),
     devServer: buildDevServer(isDev, env.port),
     devtool: isDev ? 'inline-source-map' : undefined,
-    // optimization: {
-    //   splitChunks: {
-    //     chunks: 'all',
-    //   },
-    // },
   };
 
   return config;
