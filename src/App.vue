@@ -1,27 +1,47 @@
 <script setup lang="ts">
+import '@/styles/index.scss'
+import { ref } from 'vue';
+import Logo from '@/assets/logo.png'
+import ShoppingCart from '@/assets/shopping-cart.svg'
+
+const count = ref(0)
+
 </script>
 
 
 <template>
-  <div class="vue-app">
-    <p>
-      <strong>Current route path: {{ $route.fullPath }}</strong>
-    </p>
-    <nav>
-      <router-link to="/">Go Home</router-link>
-      <router-link to="/about">Go To About</router-link>
-    </nav>
-
-    <p>
-      dsasddsddddddd
-    </p>
-    <main>
-      <router-view/>
-    </main>
+  <div style="background-color: thistle; height: 100vh;">
+    <div class="app">
+      <nav class="navigation">
+        <img :src="Logo" alt="project logo" class="project-logo">
+        <img :src="ShoppingCart" alt="shopping cart">
+        <!-- <router-link to="/">Go Home</router-link>
+        <router-link to="/about">Go To About</router-link> -->
+      </nav>
+  
+      <main>
+        <router-view />
+      </main>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-// .vue-app {
-// }
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  .project-logo {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+  }
+}
+
 </style>
