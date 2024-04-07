@@ -3,76 +3,107 @@
     {
       "id": "1",
       "name": "The Midnight Library",
-      "isFavorite": true
+      "genre": "Fantasy",
+      "isFavorite": true,
+      "discount": {
+        "old": 1000,
+        "new": 950
+      }
     },
     {
       "id": "2",
       "name": "The Great Gatsby",
+      "genre": "Classic",
       "isFavorite": true
     },
     {
       "id": "3",
       "name": "Harry Potter and the Philosopher's Stone",
+      "genre": "Fantasy",
       "isFavorite": false
     },
     {
       "id": "4",
       "name": "To Kill a Mockingbird",
-      "isFavorite": false
+      "genre": "Classic",
+      "isFavorite": true
     },
     {
       "id": "5",
       "name": "1984",
-      "isFavorite": true
+      "genre": "Dystopian",
+      "isFavorite": false
     },
     {
       "id": "6",
       "name": "The Catcher in the Rye",
+      "genre": "Classic",
       "isFavorite": true
     },
     {
       "id": "7",
       "name": "Pride and Prejudice",
-      "isFavorite": false
+      "genre": "Romance",
+      "isFavorite": false,
+      "discount": {
+        "old": 856,
+        "new": 730
+      }
     },
     {
       "id": "8",
       "name": "The Hobbit",
+      "genre": "Fantasy",
       "isFavorite": false
     },
     {
       "id": "9",
       "name": "The Hunger Games",
-      "isFavorite": false
+      "genre": "Dystopian",
+      "isFavorite": true
     },
     {
       "id": "10",
       "name": "The Alchemist",
-      "isFavorite": false
+      "genre": "Fiction",
+      "isFavorite": true,
+      "discount": {
+        "old": 500,
+        "new": 400
+      }
     },
     {
       "id": "11",
       "name": "The Lord of the Rings",
+      "genre": "Fantasy",
       "isFavorite": true
     },
     {
       "id": "12",
       "name": "The Da Vinci Code",
-      "isFavorite": false
+      "genre": "Mystery",
+      "isFavorite": false,
+      "discount": {
+        "old": 430,
+        "new": 200
+      }
     },
     {
       "id": "13",
       "name": "The Girl with the Dragon Tattoo",
+      "genre": "Mystery",
       "isFavorite": false
     },
     {
       "id": "14",
       "name": "Gone Girl",
+      "genre": "Thriller",
       "isFavorite": false
     },
     {
       "id": "15",
       "name": "The Help",
+      "genre": "Historical Fiction",
       "isFavorite": false
     }
   ]
