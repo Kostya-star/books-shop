@@ -1,10 +1,10 @@
 <script setup lang="ts">
-
+defineEmits(['update:search-books'])
 </script>
 
 <template>
   <div class="filtration">
-    <input type="text" placeholder="Search books..." />
+    <input type="text" placeholder="Search books..." @input="$emit('update:search-books', ($event.target as HTMLInputElement).value)"/>
 
     <div>
       <input type="checkbox" id="favorite" name="favorite" />

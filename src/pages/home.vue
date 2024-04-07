@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import BookItem from '@/components/book-item.vue';
 import type { IBookItem } from '@/types/BookItem';
 import FiltrationSidebar from '@/components/filtration-sidebar.vue';
@@ -11,6 +11,17 @@ const books = ref<IBookItem[]>([])
 onMounted(async () => {
   try {
     const resp = await axios.get(`${BASE_URL}books`)
+    books.value = resp.data
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+const searchBooks = ref('')
+
+watch(searchBooks, async () => {
+  try {
+    const resp = await axios.get(`${BASE_URL}books?name_like=${searchBooks.value}`);
     books.value = resp.data
   } catch (err) {
     console.log(err);
@@ -46,7 +57,9 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
       />
     </div>
 
-    <filtration-sidebar/>
+    <filtration-sidebar
+      v-model:search-books="searchBooks"
+    />
   </div>
 </template>
 
