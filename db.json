@@ -1,0 +1,79 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "name": "The Midnight Library",
+      "isFavorite": true
+    },
+    {
+      "id": "2",
+      "name": "The Great Gatsby",
+      "isFavorite": true
+    },
+    {
+      "id": "3",
+      "name": "Harry Potter and the Philosopher's Stone",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "name": "To Kill a Mockingbird",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "name": "1984",
+      "isFavorite": true
+    },
+    {
+      "id": "6",
+      "name": "The Catcher in the Rye",
+      "isFavorite": true
+    },
+    {
+      "id": "7",
+      "name": "Pride and Prejudice",
+      "isFavorite": false
+    },
+    {
+      "id": "8",
+      "name": "The Hobbit",
+      "isFavorite": false
+    },
+    {
+      "id": "9",
+      "name": "The Hunger Games",
+      "isFavorite": false
+    },
+    {
+      "id": "10",
+      "name": "The Alchemist",
+      "isFavorite": false
+    },
+    {
+      "id": "11",
+      "name": "The Lord of the Rings",
+      "isFavorite": true
+    },
+    {
+      "id": "12",
+      "name": "The Da Vinci Code",
+      "isFavorite": false
+    },
+    {
+      "id": "13",
+      "name": "The Girl with the Dragon Tattoo",
+      "isFavorite": false
+    },
+    {
+      "id": "14",
+      "name": "Gone Girl",
+      "isFavorite": false
+    },
+    {
+      "id": "15",
+      "name": "The Help",
+      "isFavorite": false
+    }
+  ]
+}
