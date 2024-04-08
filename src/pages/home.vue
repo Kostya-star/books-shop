@@ -5,28 +5,34 @@ import BookItem from '@/components/book-item.vue';
 import type { IBookItem } from '@/types/BookItem';
 import FiltrationSidebar from '@/components/filtration-sidebar.vue';
 import { BASE_URL } from '@/consts';
+import { debounce } from '@/utils/debounce';
 
 const books = ref<IBookItem[]>([])
+const booksLoading = ref(false)
+const booksError = ref(null)
+
+const searchBooks = ref('')
 
 onMounted(async () => {
+  booksLoading.value = true
   try {
     const resp = await axios.get(`${BASE_URL}books`)
     books.value = resp.data
   } catch (err) {
-    console.log(err);
+    booksError.value = err;
+  } finally {
+    booksLoading.value = false
   }
 })
 
-const searchBooks = ref('')
-
-watch(searchBooks, async () => {
+watch(searchBooks, debounce(async () => {
   try {
-    const resp = await axios.get(`${BASE_URL}books?name_like=${searchBooks.value}`);
+    const resp = await axios.get(`${BASE_URL}books?name_like=${searchBooks.value}`)
     books.value = resp.data
   } catch (err) {
-    console.log(err);
+    booksError.value = err;
   }
-})
+}, 400))
 
 async function toggleFavourite(bookId: string, isFavorite: boolean) {
   try {
@@ -38,34 +44,38 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
     const resp = await axios.patch(`${BASE_URL}books/${bookId}`, {
       isFavorite: !isFavorite
     })
-    console.log(resp);
   } catch (err) {
-    console.log(err);
+    booksError.value = err;
   }
 }
 </script>
 
-
 <template>
   <div class="main">
-    <div class="books-list">
-      <book-item 
-        v-for="book of books" 
-        :key="book.id" 
-        :book="book"
-        @toggle-favourite="toggleFavourite"
-      />
+    <div v-if="booksLoading">
+      Loading...
     </div>
 
-    <filtration-sidebar
-      v-model:search-books="searchBooks"
-    />
+    <div v-else-if="booksError">
+      Error occured
+    </div>
+
+    <template v-else>
+      <div v-if="books.length" class="books-list">
+        <book-item v-for="book of books" :key="book.id" :book="book" @toggle-favourite="toggleFavourite" />
+      </div>
+
+      <div v-else>No Books</div>
+
+      <filtration-sidebar v-model:search-books="searchBooks" />
+    </template>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main {
   display: flex;
+  justify-content: space-between;
   gap: 50px;
 }
 
