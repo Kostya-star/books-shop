@@ -44,7 +44,7 @@
       "id": "7",
       "name": "Pride and Prejudice",
       "genre": "Romance",
-      "isFavorite": false,
+      "isFavorite": true,
       "discount": {
         "old": 856,
         "new": 730
@@ -54,7 +54,7 @@
       "id": "8",
       "name": "The Hobbit",
       "genre": "Fantasy",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "9",

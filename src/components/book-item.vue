@@ -52,7 +52,7 @@ defineEmits(['toggle-favourite'])
 
   .discount {
     position: absolute;
-    left: 5px;
+    right: 5px;
     top: 5px;
 
     .old-price {

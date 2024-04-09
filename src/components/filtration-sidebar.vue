@@ -1,52 +1,46 @@
 <script setup lang="ts">
-import { toRefs, watch } from 'vue';
-
-const props = defineProps<{
-  toggleFavorite: boolean | null
+defineProps<{
+  searchBooks: string
+  toggleFavorite: boolean
+  toggleDiscount: boolean
 }>()
-const emit = defineEmits(['update:search-books', 'update:toggle-favorite'])
 
-const { toggleFavorite } = toRefs(props)
-
-function toggleFavoritesFilters(newFav: boolean) {
-  
-  // if the same chackbox is clicked then emit null and return
-  if(toggleFavorite.value === newFav) {
-    emit('update:toggle-favorite', null)
-    return
-  }
-
-  emit('update:toggle-favorite', newFav)
-}
+const emit = defineEmits<{
+  (e: 'update:search-books', search: string): void
+  (e: 'update:toggle-favorite', fav: boolean): void
+  (e: 'update:toggle-discount', discount: boolean): void
+}>()
 </script>
 
 <template>
   <div class="filtration">
-    <input type="text" placeholder="Search books..."
-      @input="$emit('update:search-books', ($event.target as HTMLInputElement).value)" />
+    <input 
+        type="text" 
+        placeholder="Search books..." 
+        :value="searchBooks"
+        @input="$emit('update:search-books', ($event.target as HTMLInputElement).value)" 
+      />
 
     <div>
       <input 
         type="checkbox" 
         id="favorite" 
         name="favorites" 
-        :checked="toggleFavorite === true"
-        @input="() => toggleFavoritesFilters(true)" 
+        :checked="toggleFavorite"
+        @input="$emit('update:toggle-favorite', ($event.target as HTMLInputElement).checked)" 
       />
-      <label for="favorite">Favorite only</label> <br />
+      <label for="favorite">Favorite only</label> 
+    </div>
 
+    <div>
       <input 
         type="checkbox" 
-        id="unfavorite" 
-        name="favorites" 
-        :checked="toggleFavorite === false"
-        @input="() => toggleFavoritesFilters(false)" 
+        id="discount" 
+        name="discount"
+        :checked="toggleDiscount"
+        @input="$emit('update:toggle-discount', ($event.target as HTMLInputElement).checked)" 
       />
-      <label for="unfavorite">Unfavorite only</label>
-    </div>
-    <div>
-      <input type="checkbox" id="discount" name="discount" />
-      <label for="discount" name="discount">Discount only</label>
+      <label for="discount">Discount only</label>
     </div>
 
     <div>

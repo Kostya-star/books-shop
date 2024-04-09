@@ -12,7 +12,8 @@ const booksLoading = ref(false)
 const booksError = ref(null)
 
 const searchBooks = ref('')
-const toggleFavorite = ref(null)
+const toggleFavorite = ref(false)
+const toggleDiscount = ref(false)
 
 onMounted(async () => {
   booksLoading.value = true
@@ -26,16 +27,17 @@ onMounted(async () => {
   }
 })
 
-watch([searchBooks, toggleFavorite], onSearchDebounced())
+watch([searchBooks, toggleFavorite, toggleDiscount], onSearchDebounced())
 
 function onSearchDebounced() {
-  return debounce(async ([search, isFavorite]) => {
+  return debounce(async ([search, isFavorite, isDiscount]) => {
 
     const searchVal = search.trim() ? `?name_like=${search}` : ''
-    const favoriteVal = isFavorite !== null ? `${searchVal ? '&' : '?'}isFavorite=${isFavorite}` : ''
+    const favoriteVal = isFavorite ? `${searchVal ? '&' : '?'}isFavorite=true` : ''
+    const discountVal = isDiscount ? `${searchVal || favoriteVal ? '&' : '?'}discount_ne=undefined` : ''
 
     try {
-      const resp = await axios.get(`${BASE_URL}books${searchVal}${favoriteVal}`)
+      const resp = await axios.get(`${BASE_URL}books${searchVal}${favoriteVal}${discountVal}`)
       books.value = resp.data
     } catch (err) {
       booksError.value = err;
@@ -79,6 +81,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
       <filtration-sidebar 
         v-model:search-books="searchBooks"
         v-model:toggle-favorite="toggleFavorite"
+        v-model:toggle-discount="toggleDiscount"
       />
     </template>
   </div>
