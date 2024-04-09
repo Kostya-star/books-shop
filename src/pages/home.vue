@@ -12,6 +12,7 @@ const booksLoading = ref(false)
 const booksError = ref(null)
 
 const searchBooks = ref('')
+const toggleFavorite = ref(null)
 
 onMounted(async () => {
   booksLoading.value = true
@@ -25,14 +26,22 @@ onMounted(async () => {
   }
 })
 
-watch(searchBooks, debounce(async () => {
-  try {
-    const resp = await axios.get(`${BASE_URL}books?name_like=${searchBooks.value}`)
-    books.value = resp.data
-  } catch (err) {
-    booksError.value = err;
-  }
-}, 400))
+watch([searchBooks, toggleFavorite], onSearchDebounced())
+
+function onSearchDebounced() {
+  return debounce(async ([search, isFavorite]) => {
+
+    const searchVal = search.trim() ? `?name_like=${search}` : ''
+    const favoriteVal = isFavorite !== null ? `${searchVal ? '&' : '?'}isFavorite=${isFavorite}` : ''
+
+    try {
+      const resp = await axios.get(`${BASE_URL}books${searchVal}${favoriteVal}`)
+      books.value = resp.data
+    } catch (err) {
+      booksError.value = err;
+    }
+  }, 300)
+}
 
 async function toggleFavourite(bookId: string, isFavorite: boolean) {
   try {
@@ -41,7 +50,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
       isFavorite: book.id === bookId ? !isFavorite : book.isFavorite
     }))
 
-    const resp = await axios.patch(`${BASE_URL}books/${bookId}`, {
+    await axios.patch(`${BASE_URL}books/${bookId}`, {
       isFavorite: !isFavorite
     })
   } catch (err) {
@@ -67,7 +76,10 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
 
       <div v-else>No Books</div>
 
-      <filtration-sidebar v-model:search-books="searchBooks" />
+      <filtration-sidebar 
+        v-model:search-books="searchBooks"
+        v-model:toggle-favorite="toggleFavorite"
+      />
     </template>
   </div>
 </template>
