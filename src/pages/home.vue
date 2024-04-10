@@ -6,6 +6,7 @@ import type { IBookItem } from '@/types/BookItem';
 import FiltrationSidebar from '@/components/filtration-sidebar.vue';
 import { BASE_URL } from '@/consts';
 import { debounce } from '@/utils/debounce';
+import { Genres } from '@/types/genres';
 
 const books = ref<IBookItem[]>([])
 const booksLoading = ref(false)
@@ -14,6 +15,7 @@ const booksError = ref(null)
 const searchBooks = ref('')
 const toggleFavorite = ref(false)
 const toggleDiscount = ref(false)
+const selectedGenre = ref<Genres | null>(null)
 
 onMounted(async () => {
   booksLoading.value = true
@@ -27,22 +29,26 @@ onMounted(async () => {
   }
 })
 
-watch([searchBooks, toggleFavorite, toggleDiscount], onSearchDebounced())
+watch([searchBooks, toggleFavorite, toggleDiscount, selectedGenre], onFiltrationDebounced())
 
-function onSearchDebounced() {
-  return debounce(async ([search, isFavorite, isDiscount]) => {
+function onFiltrationDebounced() {
+  return debounce(async ([search, isFavorite, isDiscount, genre]) => {
+    const params = {
+      name_like: search.trim(),
+      isFavorite: isFavorite || '',
+      discount_ne: isDiscount ? 'undefined' : '',
+      genre: genre ?? ''
+    }
 
-    const searchVal = search.trim() ? `?name_like=${search}` : ''
-    const favoriteVal = isFavorite ? `${searchVal ? '&' : '?'}isFavorite=true` : ''
-    const discountVal = isDiscount ? `${searchVal || favoriteVal ? '&' : '?'}discount_ne=undefined` : ''
+    const query = new URLSearchParams(Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== ''))).toString();
 
     try {
-      const resp = await axios.get(`${BASE_URL}books${searchVal}${favoriteVal}${discountVal}`)
-      books.value = resp.data
+      const resp = await axios.get(`${BASE_URL}books${query ? `?${query}` : ''}`);
+      books.value = resp.data;
     } catch (err) {
       booksError.value = err;
     }
-  }, 300)
+  }, 300);
 }
 
 async function toggleFavourite(bookId: string, isFavorite: boolean) {
@@ -82,6 +88,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
         v-model:search-books="searchBooks"
         v-model:toggle-favorite="toggleFavorite"
         v-model:toggle-discount="toggleDiscount"
+        v-model:genre="selectedGenre"
       />
     </template>
   </div>

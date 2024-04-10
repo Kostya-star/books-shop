@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "The Midnight Library",
-      "genre": "Fantasy",
+      "genre": "fantasy",
       "isFavorite": true,
       "discount": {
         "old": 1000,
@@ -13,37 +13,37 @@
     {
       "id": "2",
       "name": "The Great Gatsby",
-      "genre": "Classic",
+      "genre": "classic",
       "isFavorite": true
     },
     {
       "id": "3",
       "name": "Harry Potter and the Philosopher's Stone",
-      "genre": "Fantasy",
+      "genre": "fantasy",
       "isFavorite": false
     },
     {
       "id": "4",
       "name": "To Kill a Mockingbird",
-      "genre": "Classic",
+      "genre": "classic",
       "isFavorite": true
     },
     {
       "id": "5",
       "name": "1984",
-      "genre": "Dystopian",
+      "genre": "dystopian",
       "isFavorite": false
     },
     {
       "id": "6",
       "name": "The Catcher in the Rye",
-      "genre": "Classic",
+      "genre": "classic",
       "isFavorite": true
     },
     {
       "id": "7",
       "name": "Pride and Prejudice",
-      "genre": "Romance",
+      "genre": "romance",
       "isFavorite": true,
       "discount": {
         "old": 856,
@@ -53,19 +53,19 @@
     {
       "id": "8",
       "name": "The Hobbit",
-      "genre": "Fantasy",
+      "genre": "fantasy",
       "isFavorite": true
     },
     {
       "id": "9",
       "name": "The Hunger Games",
-      "genre": "Dystopian",
+      "genre": "dystopian",
       "isFavorite": true
     },
     {
       "id": "10",
       "name": "The Alchemist",
-      "genre": "Fiction",
+      "genre": "fiction",
       "isFavorite": true,
       "discount": {
         "old": 500,
@@ -75,13 +75,13 @@
     {
       "id": "11",
       "name": "The Lord of the Rings",
-      "genre": "Fantasy",
+      "genre": "fantasy",
       "isFavorite": true
     },
     {
       "id": "12",
       "name": "The Da Vinci Code",
-      "genre": "Mystery",
+      "genre": "mystery",
       "isFavorite": false,
       "discount": {
         "old": 430,
@@ -91,19 +91,19 @@
     {
       "id": "13",
       "name": "The Girl with the Dragon Tattoo",
-      "genre": "Mystery",
+      "genre": "mystery",
       "isFavorite": false
     },
     {
       "id": "14",
       "name": "Gone Girl",
-      "genre": "Thriller",
+      "genre": "thriller",
       "isFavorite": false
     },
     {
       "id": "15",
       "name": "The Help",
-      "genre": "Historical Fiction",
+      "genre": "historical fiction",
       "isFavorite": false
     }
   ]

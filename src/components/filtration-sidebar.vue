@@ -1,15 +1,29 @@
 <script setup lang="ts">
-defineProps<{
+import { Genres } from '@/types/genres';
+
+const props = defineProps<{
   searchBooks: string
   toggleFavorite: boolean
   toggleDiscount: boolean
+  genre: Genres | null
 }>()
 
 const emit = defineEmits<{
   (e: 'update:search-books', search: string): void
   (e: 'update:toggle-favorite', fav: boolean): void
   (e: 'update:toggle-discount', discount: boolean): void
+  (e: 'update:genre', genre: string | null): void
 }>()
+
+function selectGenre(selectedGenre: Genres) {
+  if (selectedGenre === props.genre) {
+    emit('update:genre', null)
+    return
+  }
+
+  emit('update:genre', selectedGenre)
+}
+
 </script>
 
 <template>
@@ -45,7 +59,18 @@ const emit = defineEmits<{
 
     <div>
       Choose genre:
-      <div>
+      <div v-for="_genre in Genres" :key="_genre">
+        <input 
+          type="checkbox" 
+          :id="_genre" 
+          name="genres" 
+          :checked="_genre === genre"
+          @input="() => selectGenre(_genre)"
+        />
+        <label :for="_genre" :name="_genre">{{ _genre }}</label>
+      </div>
+
+      <!-- <div>
         <input type="checkbox" id="fantasy" name="genres" />
         <label for="fantasy" name="fantasy">Fantasy</label>
       </div>
@@ -83,7 +108,7 @@ const emit = defineEmits<{
       <div>
         <input type="checkbox" id="historical fiction" name="genres" />
         <label for="historical fiction" name="historical fiction">Historical Fiction</label>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
