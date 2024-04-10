@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import '@/styles/index.scss'
-import { ref } from 'vue';
 import Logo from '@/assets/logo.png'
 import ShoppingCart from '@/assets/shopping-cart.svg'
-
-const count = ref(0)
 
 </script>
 
@@ -18,7 +15,7 @@ const count = ref(0)
         <!-- <router-link to="/">Go Home</router-link>
         <router-link to="/about">Go To About</router-link> -->
       </nav>
-  
+
       <main>
         <router-view />
       </main>
@@ -37,11 +34,11 @@ const count = ref(0)
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+
   .project-logo {
     width: 150px;
     height: 50px;
     border-radius: 5px;
   }
 }
-
 </style>

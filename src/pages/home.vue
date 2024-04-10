@@ -2,28 +2,29 @@
 import axios from 'axios';
 import { onMounted, ref, watch } from 'vue';
 import BookItem from '@/components/book-item.vue';
-import type { IBookItem } from '@/types/BookItem';
+import { IBookItem } from '@/types/BookItem';
 import FiltrationSidebar from '@/components/filtration-sidebar.vue';
 import { BASE_URL } from '@/consts';
 import { debounce } from '@/utils/debounce';
 import { Genres } from '@/types/genres';
 
 const books = ref<IBookItem[]>([])
-const booksLoading = ref(false)
-const booksError = ref(null)
+const booksLoading = ref<boolean>(false)
+const booksError = ref<boolean>(false)
 
-const searchBooks = ref('')
-const toggleFavorite = ref(false)
-const toggleDiscount = ref(false)
+const searchBooks = ref<string>('')
+const toggleFavorite = ref<boolean>(false)
+const toggleDiscount = ref<boolean>(false)
 const selectedGenre = ref<Genres | null>(null)
 
 onMounted(async () => {
   booksLoading.value = true
+  
   try {
     const resp = await axios.get(`${BASE_URL}books`)
     books.value = resp.data
   } catch (err) {
-    booksError.value = err;
+    booksError.value = true;
   } finally {
     booksLoading.value = false
   }
@@ -40,13 +41,17 @@ function onFiltrationDebounced() {
       genre: genre ?? ''
     }
 
-    const query = new URLSearchParams(Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== ''))).toString();
+    const query = new URLSearchParams(
+      Object.fromEntries(
+        Object.entries(params).filter(([_, value]) => value !== '')
+      )
+    ).toString();
 
     try {
       const resp = await axios.get(`${BASE_URL}books${query ? `?${query}` : ''}`);
       books.value = resp.data;
     } catch (err) {
-      booksError.value = err;
+      booksError.value = true;
     }
   }, 300);
 }
@@ -62,7 +67,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
       isFavorite: !isFavorite
     })
   } catch (err) {
-    booksError.value = err;
+    booksError.value = true;
   }
 }
 </script>
@@ -85,7 +90,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
       <div v-else>No Books</div>
 
       <filtration-sidebar 
-        v-model:search-books="searchBooks"
+        v-model:searchBooks="searchBooks"
         v-model:toggle-favorite="toggleFavorite"
         v-model:toggle-discount="toggleDiscount"
         v-model:genre="selectedGenre"

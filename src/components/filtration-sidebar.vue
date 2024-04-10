@@ -16,6 +16,8 @@ const emit = defineEmits<{
 }>()
 
 function selectGenre(selectedGenre: Genres) {
+
+  // if the selected genre was pressed again, cancel genre filtration and emit null
   if (selectedGenre === props.genre) {
     emit('update:genre', null)
     return
@@ -37,8 +39,8 @@ function selectGenre(selectedGenre: Genres) {
 
     <div>
       <input 
-        type="checkbox" 
         id="favorite" 
+        type="checkbox" 
         name="favorites" 
         :checked="toggleFavorite"
         @input="$emit('update:toggle-favorite', ($event.target as HTMLInputElement).checked)" 
@@ -48,8 +50,8 @@ function selectGenre(selectedGenre: Genres) {
 
     <div>
       <input 
-        type="checkbox" 
         id="discount" 
+        type="checkbox" 
         name="discount"
         :checked="toggleDiscount"
         @input="$emit('update:toggle-discount', ($event.target as HTMLInputElement).checked)" 
@@ -61,54 +63,14 @@ function selectGenre(selectedGenre: Genres) {
       Choose genre:
       <div v-for="_genre in Genres" :key="_genre">
         <input 
-          type="checkbox" 
           :id="_genre" 
+          type="checkbox" 
           name="genres" 
           :checked="_genre === genre"
           @input="() => selectGenre(_genre)"
         />
         <label :for="_genre" :name="_genre">{{ _genre }}</label>
       </div>
-
-      <!-- <div>
-        <input type="checkbox" id="fantasy" name="genres" />
-        <label for="fantasy" name="fantasy">Fantasy</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="classic" name="genres" />
-        <label for="classic" name="classic">Classic</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="dystopian" name="genres" />
-        <label for="dystopian" name="dystopian">Dystopian</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="romance" name="genres" />
-        <label for="romance" name="romance">Romance</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="fiction" name="genres" />
-        <label for="fiction" name="fiction">Fiction</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="mystery" name="genres" />
-        <label for="mystery" name="mystery">Mystery</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="thriller" name="genres" />
-        <label for="thriller" name="thriller">Thriller</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="historical fiction" name="genres" />
-        <label for="historical fiction" name="historical fiction">Historical Fiction</label>
-      </div> -->
     </div>
   </div>
 </template>
