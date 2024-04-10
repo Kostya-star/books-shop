@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Genres } from '@/types/genres';
+import TextInput from '@/components/UI/text-input.vue'
+import CloseSvg from '@/assets/close.svg'
 
 const props = defineProps<{
   searchBooks: string
@@ -30,12 +32,16 @@ function selectGenre(selectedGenre: Genres) {
 
 <template>
   <div class="filtration">
-    <input 
-        type="text" 
-        placeholder="Search books..." 
-        :value="searchBooks"
-        @input="$emit('update:search-books', ($event.target as HTMLInputElement).value)" 
-      />
+
+    <text-input
+      :model-value="searchBooks"
+      placeholder="Search books..." 
+      @update:model-value="$emit('update:search-books', $event)"
+    >
+      <template #append>
+        <img :src="CloseSvg" @click="$emit('update:search-books', '')">
+      </template>
+    </text-input>
 
     <div>
       <input 

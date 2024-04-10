@@ -43,6 +43,7 @@ defineEmits(['toggle-favourite'])
 
   button {
     margin-top: auto;
+    cursor: pointer;
   }
 
   .book-img {
