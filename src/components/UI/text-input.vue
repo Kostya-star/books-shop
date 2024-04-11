@@ -18,7 +18,7 @@ defineEmits<{
       :value="modelValue"
       @input="$emit('update:model-value', ($event.target as HTMLInputElement).value)" 
     />
-    <span class="append">
+    <span v-if="$slots.append && modelValue" class="append">
       <slot name="append"/>
     </span>
   </div>

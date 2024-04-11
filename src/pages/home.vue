@@ -8,6 +8,8 @@ import { BASE_URL } from '@/consts';
 import { debounce } from '@/utils/debounce';
 import { Genres } from '@/types/genres';
 
+defineEmits(['add-to-cart'])
+
 const books = ref<IBookItem[]>([])
 const booksLoading = ref<boolean>(false)
 const booksError = ref<boolean>(false)
@@ -84,7 +86,12 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
 
     <template v-else>
       <div v-if="books.length" class="books-list">
-        <book-item v-for="book of books" :key="book.id" :book="book" @toggle-favourite="toggleFavourite" />
+        <book-item 
+          v-for="book of books" 
+          :key="book.id" 
+          :book="book" 
+          @toggle-favourite="toggleFavourite" 
+        />
       </div>
 
       <div v-else>No Books</div>

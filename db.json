@@ -8,37 +8,43 @@
       "discount": {
         "old": 1000,
         "new": 950
-      }
+      },
+      "inCart": 0
     },
     {
       "id": "2",
       "name": "The Great Gatsby",
       "genre": "classic",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "3",
       "name": "Harry Potter and the Philosopher's Stone",
       "genre": "fantasy",
-      "isFavorite": false
+      "isFavorite": false,
+      "inCart": 0
     },
     {
       "id": "4",
       "name": "To Kill a Mockingbird",
       "genre": "classic",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "5",
       "name": "1984",
       "genre": "dystopian",
-      "isFavorite": false
+      "isFavorite": false,
+      "inCart": 0
     },
     {
       "id": "6",
       "name": "The Catcher in the Rye",
       "genre": "classic",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "7",
@@ -48,19 +54,22 @@
       "discount": {
         "old": 856,
         "new": 730
-      }
+      },
+      "inCart": 0
     },
     {
       "id": "8",
       "name": "The Hobbit",
       "genre": "fantasy",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "9",
       "name": "The Hunger Games",
       "genre": "dystopian",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "10",
@@ -70,13 +79,15 @@
       "discount": {
         "old": 500,
         "new": 400
-      }
+      },
+      "inCart": 0
     },
     {
       "id": "11",
       "name": "The Lord of the Rings",
       "genre": "fantasy",
-      "isFavorite": true
+      "isFavorite": true,
+      "inCart": 0
     },
     {
       "id": "12",
@@ -86,25 +97,29 @@
       "discount": {
         "old": 430,
         "new": 200
-      }
+      },
+      "inCart": 0
     },
     {
       "id": "13",
       "name": "The Girl with the Dragon Tattoo",
       "genre": "mystery",
-      "isFavorite": false
+      "isFavorite": false,
+      "inCart": 0
     },
     {
       "id": "14",
       "name": "Gone Girl",
       "genre": "thriller",
-      "isFavorite": false
+      "isFavorite": false,
+      "inCart": 0
     },
     {
       "id": "15",
       "name": "The Help",
       "genre": "historical fiction",
-      "isFavorite": false
+      "isFavorite": false,
+      "inCart": 0
     }
   ]
 }

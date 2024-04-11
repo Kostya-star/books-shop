@@ -9,4 +9,5 @@ export interface IBookItem {
   isFavorite: boolean;
   genre: string;
   discount?: Discount;
+  inCart: number
 }

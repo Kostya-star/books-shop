@@ -2,7 +2,6 @@
 import '@/styles/index.scss'
 import Logo from '@/assets/logo.png'
 import ShoppingCart from '@/assets/shopping-cart.svg'
-
 </script>
 
 
@@ -11,13 +10,17 @@ import ShoppingCart from '@/assets/shopping-cart.svg'
     <div class="app">
       <nav class="navigation">
         <img :src="Logo" alt="project logo" class="project-logo">
-        <img :src="ShoppingCart" alt="shopping cart">
+
+        <p class="cart">
+          <img :src="ShoppingCart" alt="shopping cart">
+          <!-- <span v-if="cartBooks.length">{{ cartBooks.length }}</span> -->
+        </p>
         <!-- <router-link to="/">Go Home</router-link>
         <router-link to="/about">Go To About</router-link> -->
       </nav>
 
       <main>
-        <router-view />
+        <router-view/>
       </main>
     </div>
   </div>
@@ -39,6 +42,18 @@ import ShoppingCart from '@/assets/shopping-cart.svg'
     width: 150px;
     height: 50px;
     border-radius: 5px;
+  }
+
+  .cart {
+    position: relative;
+    span {
+      position: absolute;
+      background-color: yellow;
+      padding: 2px;
+      border-radius: 50%;
+      left: -20px;
+      bottom: 0;
+    }
   }
 }
 </style>

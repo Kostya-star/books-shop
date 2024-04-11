@@ -7,7 +7,7 @@ defineProps<{
   book: IBookItem
 }>()
 
-defineEmits(['toggle-favourite'])
+defineEmits(['toggle-favourite', 'add-to-cart'])
 
 </script>
 
@@ -23,10 +23,17 @@ defineEmits(['toggle-favourite'])
       -
       <span class="new-price">{{ book.discount.new }}₽</span>
     </div>
-    <button>Add to cart</button>
+    
+    <div class="footer">
+      <div class="to-cart">
+        <span>-</span>
+        <span>{{ book.inCart }}</span>
+        <span>+</span>
+      </div>
 
-    <img :src="HeartSvg" alt="" class="favorite-icon" :class="{ 'favorite_active': book.isFavorite }"
-      @click="$emit('toggle-favourite', book.id, book.isFavorite)">
+      <img :src="HeartSvg" :class="{ 'favorite_active': book.isFavorite }"
+        @click="$emit('toggle-favourite', book.id, book.isFavorite)">
+    </div>
   </div>
 </template>
 
@@ -67,15 +74,41 @@ defineEmits(['toggle-favourite'])
     }
   }
 
-  .favorite-icon {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-  }
+  .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
 
-  .favorite_active {
-    filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+    .to-cart {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      span {
+        font-weight: 600;
+        &:first-child, &:last-child {
+          padding: 1px 5px;
+          border-radius: 5px;
+          background-color: rgb(213, 209, 209);
+          cursor: pointer;
+          
+          &:hover {
+            background-color: gray;
+            color: white;
+          }
+        }
+      }
+    }
+
+    img {
+      cursor: pointer;
+
+      &.favorite_active {
+        filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+      }
+    }
+
   }
 }
 </style>
