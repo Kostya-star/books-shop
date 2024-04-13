@@ -29,7 +29,7 @@
       "id": "4",
       "name": "To Kill a Mockingbird",
       "genre": "classic",
-      "isFavorite": true,
+      "isFavorite": false,
       "inCart": 0
     },
     {
