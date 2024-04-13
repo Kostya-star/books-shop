@@ -2,6 +2,17 @@
 import '@/styles/index.scss'
 import Logo from '@/assets/logo.png'
 import ShoppingCart from '@/assets/shopping-cart.svg'
+import { useBooksStore } from '@/store/books';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
+const booksStore = useBooksStore();
+const { books } = storeToRefs(booksStore);
+
+const totalCartPrice = computed(() =>
+  books.value.filter(book => book.inCart)
+    .reduce((sum, book) => sum + book.price * book.inCart, 0)
+)
 </script>
 
 
@@ -13,6 +24,8 @@ import ShoppingCart from '@/assets/shopping-cart.svg'
 
         <p class="cart">
           <img :src="ShoppingCart" alt="shopping cart">
+
+          {{ totalCartPrice }}₽
           <!-- <span v-if="cartBooks.length">{{ cartBooks.length }}</span> -->
         </p>
         <!-- <router-link to="/">Go Home</router-link>

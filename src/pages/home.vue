@@ -63,7 +63,21 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
     isError.value = true;
   }
 }
-</script>
+
+async function handleBooksInCart(bookId: string, newCartCount: number) {
+  try {
+    books.value = books.value.map(book => ({
+      ...book,
+      inCart: bookId === book.id ? newCartCount : book.inCart
+    }))
+
+    await axios.patch(`${BASE_URL}books/${bookId}`, {
+      inCart: newCartCount
+    })
+  } catch (error) {
+    isError.value = true;
+  }
+}</script>
 
 <template>
   <div class="main">
@@ -81,6 +95,7 @@ async function toggleFavourite(bookId: string, isFavorite: boolean) {
         :key="book.id" 
         :book="book" 
         @toggle-favourite="toggleFavourite" 
+        @handle-cart-books="handleBooksInCart"
       />
     </div>
 

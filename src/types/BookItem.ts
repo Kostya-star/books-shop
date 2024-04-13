@@ -10,4 +10,5 @@ export interface IBookItem {
   genre: string;
   discount?: Discount;
   inCart: number
+  price: number
 }

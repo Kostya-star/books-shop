@@ -7,7 +7,7 @@ defineProps<{
   book: IBookItem
 }>()
 
-defineEmits(['toggle-favourite', 'add-to-cart'])
+defineEmits(['toggle-favourite', 'add-to-cart', 'handle-cart-books'])
 
 </script>
 
@@ -18,17 +18,20 @@ defineEmits(['toggle-favourite', 'add-to-cart'])
       {{ book.name }}
     </span>
 
-    <div v-if="book.discount" class="discount">
-      <span class="old-price">{{ book.discount.old }}₽</span>
-      -
-      <span class="new-price">{{ book.discount.new }}₽</span>
+    <div class="price">
+      <div v-if="book.discount">
+        <span class="old-price">{{ book.discount.old }}₽</span>
+        -
+        <span class="new-price">{{ book.discount.new }}₽</span>
+      </div>
+      <span v-else class="new-price">{{ book.price }}₽</span>
     </div>
     
     <div class="footer">
       <div class="to-cart">
-        <span>-</span>
+        <span @click="book.inCart > 0 ? $emit('handle-cart-books', book.id, book.inCart - 1) : null">-</span>
         <span>{{ book.inCart }}</span>
-        <span>+</span>
+        <span @click="$emit('handle-cart-books', book.id, book.inCart + 1)">+</span>
       </div>
 
       <img :src="HeartSvg" :class="{ 'favorite_active': book.isFavorite }"
@@ -58,7 +61,7 @@ defineEmits(['toggle-favourite', 'add-to-cart'])
     height: auto;
   }
 
-  .discount {
+  .price {
     position: absolute;
     right: 5px;
     top: 5px;

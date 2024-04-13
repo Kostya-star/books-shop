@@ -9,42 +9,48 @@
         "old": 1000,
         "new": 950
       },
-      "inCart": 0
+      "inCart": 0,
+      "price": 950
     },
     {
       "id": "2",
       "name": "The Great Gatsby",
       "genre": "classic",
       "isFavorite": true,
-      "inCart": 0
+      "inCart": 0,
+      "price": 550
     },
     {
       "id": "3",
       "name": "Harry Potter and the Philosopher's Stone",
       "genre": "fantasy",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 0,
+      "price": 1100
     },
     {
       "id": "4",
       "name": "To Kill a Mockingbird",
       "genre": "classic",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 10,
+      "price": 985
     },
     {
       "id": "5",
       "name": "1984",
       "genre": "dystopian",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 0,
+      "price": 375
     },
     {
       "id": "6",
       "name": "The Catcher in the Rye",
       "genre": "classic",
       "isFavorite": true,
-      "inCart": 0
+      "inCart": 0,
+      "price": 559
     },
     {
       "id": "7",
@@ -55,21 +61,24 @@
         "old": 856,
         "new": 730
       },
-      "inCart": 0
+      "inCart": 0,
+      "price": 730
     },
     {
       "id": "8",
       "name": "The Hobbit",
       "genre": "fantasy",
       "isFavorite": true,
-      "inCart": 0
+      "inCart": 0,
+      "price": 999
     },
     {
       "id": "9",
       "name": "The Hunger Games",
       "genre": "dystopian",
       "isFavorite": true,
-      "inCart": 0
+      "inCart": 0,
+      "price": 475
     },
     {
       "id": "10",
@@ -80,14 +89,16 @@
         "old": 500,
         "new": 400
       },
-      "inCart": 0
+      "inCart": 0,
+      "price": 400
     },
     {
       "id": "11",
       "name": "The Lord of the Rings",
       "genre": "fantasy",
       "isFavorite": true,
-      "inCart": 0
+      "inCart": 0,
+      "price": 435
     },
     {
       "id": "12",
@@ -98,28 +109,32 @@
         "old": 430,
         "new": 200
       },
-      "inCart": 0
+      "inCart": 0,
+      "price": 200
     },
     {
       "id": "13",
       "name": "The Girl with the Dragon Tattoo",
       "genre": "mystery",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 0,
+      "price": 555
     },
     {
       "id": "14",
       "name": "Gone Girl",
       "genre": "thriller",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 0,
+      "price": 699
     },
     {
       "id": "15",
       "name": "The Help",
       "genre": "historical fiction",
       "isFavorite": false,
-      "inCart": 0
+      "inCart": 0,
+      "price": 799
     }
   ]
 }
