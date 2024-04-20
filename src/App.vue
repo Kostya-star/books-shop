@@ -21,7 +21,7 @@ import Navigation from '@/components/UI/navigation.vue';
 
 <style lang="scss" scoped>
 .app {
-  background-color: thistle;
+  background-color: var(--purple);
   min-height: 100vh;
   max-height: 100%;
 }
@@ -32,7 +32,7 @@ import Navigation from '@/components/UI/navigation.vue';
   .navigation {
     position: sticky;
     top: 0;
-    background-color: thistle;
+    background-color: var(--purple);
     border-bottom: solid 1px rgb(238, 111, 238);
     z-index: 1;
     margin-bottom: 20px;
