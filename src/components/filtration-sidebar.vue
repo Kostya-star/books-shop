@@ -43,7 +43,7 @@ function selectGenre(selectedGenre: Genres) {
       </template>
     </text-input>
 
-    <div>
+    <div class="checkbox-pair">
       <input 
         id="favorite" 
         type="checkbox" 
@@ -54,7 +54,7 @@ function selectGenre(selectedGenre: Genres) {
       <label for="favorite">Favorite only</label> 
     </div>
 
-    <div>
+    <div class="checkbox-pair">
       <input 
         id="discount" 
         type="checkbox" 
@@ -67,7 +67,7 @@ function selectGenre(selectedGenre: Genres) {
 
     <div>
       Choose genre:
-      <div v-for="_genre in Genres" :key="_genre">
+      <div v-for="_genre in Genres" :key="_genre" class="checkbox-pair">
         <input 
           :id="_genre" 
           type="checkbox" 
@@ -86,5 +86,13 @@ function selectGenre(selectedGenre: Genres) {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  
+  .checkbox-pair {
+    display: flex;
+    gap: 5px;
+    input, label {
+      cursor: pointer;
+    }
+  }
 }
 </style>
