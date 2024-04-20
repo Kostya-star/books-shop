@@ -67,7 +67,8 @@ const vueRules = {
 	'vue/require-default-prop': 'off',
 	// Require shorthand form attribute when v-bind value is true
 	'vue/prefer-true-attribute-shorthand': 'error',
-	'vue/first-attribute-linebreak': 'off'
+	'vue/first-attribute-linebreak': 'off',
+	'no-console': 'off'
 };
 
 const getExtends = (configs = []) => [

@@ -7,4 +7,6 @@ export enum Genres {
   mystery = 'mystery',
   thriller = 'thriller',
   'historical fiction' = 'historical fiction',
+  'post-apocalyptic' = 'post-apocalyptic',
+  adventure = 'adventure'
 }

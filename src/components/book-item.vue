@@ -7,7 +7,10 @@ defineProps<{
   book: IBookItem
 }>()
 
-defineEmits(['toggle-favourite', 'add-to-cart', 'handle-cart-books'])
+defineEmits<{
+  (e: 'toggle-favourite', bookId: number, newFav: boolean): void
+  (e: 'handle-cart-books', bookId: number, cartCount: number): void
+}>()
 
 </script>
 
@@ -30,7 +33,7 @@ defineEmits(['toggle-favourite', 'add-to-cart', 'handle-cart-books'])
     <div class="footer">
       <div class="to-cart">
         <span @click="book.inCart > 0 ? $emit('handle-cart-books', book.id, book.inCart - 1) : null">-</span>
-        <span>{{ book.inCart }}</span>
+        <span :class="{ 'added-to-cart': book.inCart }">{{ book.inCart }}</span>
         <span @click="$emit('handle-cart-books', book.id, book.inCart + 1)">+</span>
       </div>
 
@@ -101,6 +104,13 @@ defineEmits(['toggle-favourite', 'add-to-cart', 'handle-cart-books'])
             color: white;
           }
         }
+      }
+      
+      .added-to-cart {
+        background-color: rgb(14, 153, 14);
+        color: #fff;
+        padding: 2px;
+        border-radius: 5px;
       }
     }
 

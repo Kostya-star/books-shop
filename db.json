@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "id": "1",
+      "id": 1,
       "name": "The Midnight Library",
       "genre": "fantasy",
       "isFavorite": true,
@@ -9,51 +9,51 @@
         "old": 1000,
         "new": 950
       },
-      "inCart": 0,
+      "inCart": 2,
       "price": 950
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "The Great Gatsby",
       "genre": "classic",
       "isFavorite": true,
-      "inCart": 0,
+      "inCart": 1,
       "price": 550
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Harry Potter and the Philosopher's Stone",
       "genre": "fantasy",
       "isFavorite": false,
-      "inCart": 0,
+      "inCart": 2,
       "price": 1100
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "To Kill a Mockingbird",
       "genre": "classic",
       "isFavorite": false,
-      "inCart": 10,
+      "inCart": 1,
       "price": 985
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "1984",
       "genre": "dystopian",
       "isFavorite": false,
-      "inCart": 0,
+      "inCart": 2,
       "price": 375
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "The Catcher in the Rye",
       "genre": "classic",
       "isFavorite": true,
-      "inCart": 0,
+      "inCart": 1,
       "price": 559
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Pride and Prejudice",
       "genre": "romance",
       "isFavorite": true,
@@ -61,27 +61,27 @@
         "old": 856,
         "new": 730
       },
-      "inCart": 0,
+      "inCart": 2,
       "price": 730
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "The Hobbit",
       "genre": "fantasy",
       "isFavorite": true,
-      "inCart": 0,
+      "inCart": 1,
       "price": 999
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "The Hunger Games",
       "genre": "dystopian",
       "isFavorite": true,
-      "inCart": 0,
+      "inCart": 1,
       "price": 475
     },
     {
-      "id": "10",
+      "id": 10,
       "name": "The Alchemist",
       "genre": "fiction",
       "isFavorite": true,
@@ -89,19 +89,19 @@
         "old": 500,
         "new": 400
       },
-      "inCart": 0,
+      "inCart": 1,
       "price": 400
     },
     {
-      "id": "11",
+      "id": 11,
       "name": "The Lord of the Rings",
       "genre": "fantasy",
       "isFavorite": true,
-      "inCart": 0,
+      "inCart": 1,
       "price": 435
     },
     {
-      "id": "12",
+      "id": 12,
       "name": "The Da Vinci Code",
       "genre": "mystery",
       "isFavorite": false,
@@ -109,32 +109,72 @@
         "old": 430,
         "new": 200
       },
-      "inCart": 0,
+      "inCart": 1,
       "price": 200
     },
     {
-      "id": "13",
+      "id": 13,
       "name": "The Girl with the Dragon Tattoo",
       "genre": "mystery",
       "isFavorite": false,
-      "inCart": 0,
+      "inCart": 1,
       "price": 555
     },
     {
-      "id": "14",
+      "id": 14,
       "name": "Gone Girl",
       "genre": "thriller",
       "isFavorite": false,
-      "inCart": 0,
+      "inCart": 1,
       "price": 699
     },
     {
-      "id": "15",
+      "id": 15,
       "name": "The Help",
       "genre": "historical fiction",
       "isFavorite": false,
-      "inCart": 0,
+      "inCart": 1,
       "price": 799
+    },
+    {
+      "id": 16,
+      "name": "The Road",
+      "genre": "post-apocalyptic",
+      "isFavorite": false,
+      "inCart": 1,
+      "price": 620
+    },
+    {
+      "id": 17,
+      "name": "The Picture of Dorian Gray",
+      "genre": "classic",
+      "isFavorite": false,
+      "inCart": 1,
+      "price": 499
+    },
+    {
+      "id": 18,
+      "name": "Moby-Dick",
+      "genre": "classic",
+      "isFavorite": false,
+      "inCart": 1,
+      "price": 899
+    },
+    {
+      "id": 19,
+      "name": "Brave New World",
+      "genre": "dystopian",
+      "isFavorite": false,
+      "inCart": 1,
+      "price": 675
+    },
+    {
+      "id": 20,
+      "name": "The Count of Monte Cristo",
+      "genre": "adventure",
+      "isFavorite": false,
+      "inCart": 1,
+      "price": 825
     }
   ]
 }

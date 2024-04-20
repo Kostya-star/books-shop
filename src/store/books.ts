@@ -10,7 +10,14 @@ export const useBooksStore = defineStore('books', () => {
   const isLoading = ref<boolean>(false)
   const isError = ref<boolean>(false)
 
-  return { books, isLoading, isError, getBooks }
+  return { 
+    books, 
+    isLoading, 
+    isError, 
+    getBooks, 
+    toggleFavourite, 
+    addDeleteBooksInCart 
+  }
 
   async function getBooks(params?: GetBooksQuery) {
     isLoading.value = true;
@@ -30,6 +37,36 @@ export const useBooksStore = defineStore('books', () => {
       isError.value = true;
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  async function toggleFavourite(bookId: number, isFavorite: boolean) {
+    try {
+      books.value = books.value.map(book => ({
+        ...book,
+        isFavorite: book.id === bookId ? !isFavorite : book.isFavorite
+      }))
+  
+      await axios.patch(`${BASE_URL}books/${bookId}`, {
+        isFavorite: !isFavorite
+      })
+    } catch (err) {
+      isError.value = true;
+    }
+  }
+
+  async function addDeleteBooksInCart(bookId: number, newCartCount: number) {
+    try {
+      books.value = books.value.map(book => ({
+        ...book,
+        inCart: bookId === book.id ? newCartCount : book.inCart
+      }))
+  
+      await axios.patch(`${BASE_URL}books/${bookId}`, {
+        inCart: newCartCount
+      })
+    } catch (error) {
+      isError.value = true;
     }
   }
 });

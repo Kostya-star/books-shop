@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import axios from 'axios';
-import { onMounted, reactive, ref, watch } from 'vue';
-import BookItem from '@/components/book-item.vue';
+import { onMounted, reactive, watch } from 'vue';
 import FiltrationSidebar from '@/components/filtration-sidebar.vue';
-import { BASE_URL } from '@/consts';
 import { debounce } from '@/utils/debounce';
 import { Genres } from '@/types/genres';
 import { useBooksStore } from '@/store/books';
 import { storeToRefs } from 'pinia';
 import { GetBooksQuery } from '@/types/query';
+import BooksList from '@/components/books-list.vue';
 
 interface Filters {
   searchBooks: string
@@ -21,7 +19,7 @@ defineEmits(['add-to-cart'])
 
 const booksStore = useBooksStore();
 const { books, isLoading, isError } = storeToRefs(booksStore);
-const { getBooks } = booksStore;
+const { getBooks, toggleFavourite, addDeleteBooksInCart } = booksStore;
 
 const filters = reactive<Filters>({
   searchBooks: '',
@@ -48,65 +46,26 @@ function onFiltrationDebounced() {
     await getBooks(params)
   }, 300);
 }
-
-async function toggleFavourite(bookId: string, isFavorite: boolean) {
-  try {
-    books.value = books.value.map(book => ({
-      ...book,
-      isFavorite: book.id === bookId ? !isFavorite : book.isFavorite
-    }))
-
-    await axios.patch(`${BASE_URL}books/${bookId}`, {
-      isFavorite: !isFavorite
-    })
-  } catch (err) {
-    isError.value = true;
-  }
-}
-
-async function handleBooksInCart(bookId: string, newCartCount: number) {
-  try {
-    books.value = books.value.map(book => ({
-      ...book,
-      inCart: bookId === book.id ? newCartCount : book.inCart
-    }))
-
-    await axios.patch(`${BASE_URL}books/${bookId}`, {
-      inCart: newCartCount
-    })
-  } catch (error) {
-    isError.value = true;
-  }
-}</script>
+</script>
 
 <template>
   <div class="main">
-    <div v-if="isLoading">
-      Loading...
-    </div>
+    <books-list 
+      :books="books" 
+      :is-loading="isLoading" 
+      :is-error="isError"
+      @toggle-favourite="toggleFavourite"
+      @handle-cart-books="addDeleteBooksInCart"
+    />
 
-    <div v-else-if="isError">
-      Error occured
-    </div>
-
-    <div v-else-if="books.length" class="books-list">
-      <book-item 
-        v-for="book of books" 
-        :key="book.id" 
-        :book="book" 
-        @toggle-favourite="toggleFavourite" 
-        @handle-cart-books="handleBooksInCart"
+    <div class="filtration">
+      <filtration-sidebar 
+        v-model:searchBooks="filters.searchBooks"
+        v-model:toggle-favorite="filters.toggleFavorite"
+        v-model:toggle-discount="filters.toggleDiscount"
+        v-model:genre="filters.selectedGenre"
       />
     </div>
-
-    <div v-else>No Books</div>
-
-    <filtration-sidebar 
-      v-model:searchBooks="filters.searchBooks"
-      v-model:toggle-favorite="filters.toggleFavorite"
-      v-model:toggle-discount="filters.toggleDiscount"
-      v-model:genre="filters.selectedGenre"
-    />
   </div>
 </template>
 
@@ -115,11 +74,11 @@ async function handleBooksInCart(bookId: string, newCartCount: number) {
   display: flex;
   justify-content: space-between;
   gap: 50px;
-}
 
-.books-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
+  .filtration {
+    position: sticky;
+    right: 0;
+    top: 70px; // the height of the navigation + 5px
+  }
 }
 </style>

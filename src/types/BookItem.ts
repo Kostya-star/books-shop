@@ -4,7 +4,7 @@ interface Discount {
 }
 
 export interface IBookItem {
-  id: string;
+  id: number;
   name: string;
   isFavorite: boolean;
   genre: string;

@@ -1,39 +1,19 @@
 <script setup lang="ts">
 import '@/styles/index.scss'
-import Logo from '@/assets/logo.png'
-import ShoppingCart from '@/assets/shopping-cart.svg'
-import { useBooksStore } from '@/store/books';
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import Navigation from '@/components/UI/navigation.vue';
 
-const booksStore = useBooksStore();
-const { books } = storeToRefs(booksStore);
-
-const totalCartPrice = computed(() =>
-  books.value.filter(book => book.inCart)
-    .reduce((sum, book) => sum + book.price * book.inCart, 0)
-)
 </script>
 
 
 <template>
-  <div style="background-color: thistle; height: 100vh;">
-    <div class="app">
-      <nav class="navigation">
-        <img :src="Logo" alt="project logo" class="project-logo">
-
-        <p class="cart">
-          <img :src="ShoppingCart" alt="shopping cart">
-
-          {{ totalCartPrice }}₽
-          <!-- <span v-if="cartBooks.length">{{ cartBooks.length }}</span> -->
-        </p>
-        <!-- <router-link to="/">Go Home</router-link>
-        <router-link to="/about">Go To About</router-link> -->
-      </nav>
+  <div class="app">
+    <div class="content">
+      <div class="navigation">
+        <navigation />
+      </div>
 
       <main>
-        <router-view/>
+        <router-view />
       </main>
     </div>
   </div>
@@ -41,32 +21,21 @@ const totalCartPrice = computed(() =>
 
 <style lang="scss" scoped>
 .app {
+  background-color: thistle;
+  min-height: 100vh;
+  max-height: 100%;
+}
+.content {
   max-width: 1400px;
   margin: 0 auto;
-}
-
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-
-  .project-logo {
-    width: 150px;
-    height: 50px;
-    border-radius: 5px;
-  }
-
-  .cart {
-    position: relative;
-    span {
-      position: absolute;
-      background-color: yellow;
-      padding: 2px;
-      border-radius: 50%;
-      left: -20px;
-      bottom: 0;
-    }
+  
+  .navigation {
+    position: sticky;
+    top: 0;
+    background-color: thistle;
+    border-bottom: solid 1px rgb(238, 111, 238);
+    z-index: 1;
+    margin-bottom: 20px;
   }
 }
 </style>
