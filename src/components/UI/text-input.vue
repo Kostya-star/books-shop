@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 
-defineProps<{
-  placeholder?: string
+interface Props {
   modelValue: string
-}>()
+  placeholder?: string
+  autofocus?: boolean
+}
+
+withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  placeholder: '',
+  autofocus: false
+})
 
 defineEmits<{
   (e: 'update:model-value', text: string): void
@@ -13,6 +20,7 @@ defineEmits<{
 <template>
   <div class="text-input">
     <input 
+      v-focus="autofocus"
       type="text" 
       :placeholder="placeholder" 
       :value="modelValue"

@@ -34,6 +34,7 @@ function selectGenre(selectedGenre: Genres) {
   <div class="filtration">
 
     <text-input
+      autofocus
       :model-value="searchBooks"
       placeholder="Search books..." 
       @update:model-value="$emit('update:search-books', $event)"

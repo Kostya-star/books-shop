@@ -26,7 +26,7 @@ const open = ref(false)
     />  
 
     <div class="buy">
-      <button @click="open = true"> 
+      <button v-tooltip="'Buy books'" @click="open = true"> 
         BUY NOW!
       </button>
     </div>

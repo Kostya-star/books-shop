@@ -21,7 +21,7 @@ const totalCartPrice = computed(() =>
         <img :src="Logo" alt="project logo" class="project-logo">
       </RouterLink>
   
-      <RouterLink to="/cart" class="cart">
+      <RouterLink v-tooltip="'Go to cart'" to="/cart" class="cart">
         <img :src="ShoppingCart" alt="shopping cart">
   
         <span v-if="totalCartPrice">

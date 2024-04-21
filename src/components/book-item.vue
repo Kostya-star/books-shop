@@ -23,21 +23,21 @@ defineEmits<{
 
     <div class="price">
       <div v-if="book.discount">
-        <span class="old-price">{{ book.discount.old }}₽</span>
+        <span v-tooltip.red="'Old price'" class="old-price">{{ book.discount.old }}₽</span>
         -
-        <span class="new-price">{{ book.discount.new }}₽</span>
+        <span v-tooltip="'New price'" class="new-price">{{ book.discount.new }}₽</span>
       </div>
-      <span v-else class="new-price">{{ book.price }}₽</span>
+      <span v-else v-tooltip="'Price'" class="new-price">{{ book.price }}₽</span>
     </div>
     
     <div class="footer">
       <div class="to-cart">
-        <span @click="book.inCart > 0 ? $emit('handle-cart-books', book.id, book.inCart - 1) : null">-</span>
+        <span v-tooltip.red="'Delete book from cart'" @click="book.inCart > 0 ? $emit('handle-cart-books', book.id, book.inCart - 1) : null">-</span>
         <span :class="{ 'added-to-cart': book.inCart }">{{ book.inCart }}</span>
-        <span @click="$emit('handle-cart-books', book.id, book.inCart + 1)">+</span>
+        <span v-tooltip="'Add book to cart'" @click="$emit('handle-cart-books', book.id, book.inCart + 1)">+</span>
       </div>
 
-      <img :src="HeartSvg" :class="{ 'favorite_active': book.isFavorite }"
+      <img v-tooltip.red="'Mark (un)favourite'" :src="HeartSvg" :class="{ 'favorite_active': book.isFavorite }"
         @click="$emit('toggle-favourite', book.id, book.isFavorite)">
     </div>
   </div>

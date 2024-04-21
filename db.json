@@ -68,7 +68,7 @@
       "id": 8,
       "name": "The Hobbit",
       "genre": "fantasy",
-      "isFavorite": true,
+      "isFavorite": false,
       "inCart": 0,
       "price": 999
     },
@@ -76,7 +76,7 @@
       "id": 9,
       "name": "The Hunger Games",
       "genre": "dystopian",
-      "isFavorite": true,
+      "isFavorite": false,
       "inCart": 0,
       "price": 475
     },
@@ -84,7 +84,7 @@
       "id": 10,
       "name": "The Alchemist",
       "genre": "fiction",
-      "isFavorite": true,
+      "isFavorite": false,
       "discount": {
         "old": 500,
         "new": 400
@@ -124,7 +124,7 @@
       "id": 14,
       "name": "Gone Girl",
       "genre": "thriller",
-      "isFavorite": false,
+      "isFavorite": true,
       "inCart": 0,
       "price": 699
     },
