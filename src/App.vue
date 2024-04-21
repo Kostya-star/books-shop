@@ -28,6 +28,7 @@ import Navigation from '@/components/UI/navigation.vue';
 .content {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 30px 0px;
   
   .navigation {
     position: sticky;
